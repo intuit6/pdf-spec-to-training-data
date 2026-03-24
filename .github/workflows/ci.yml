@@ -122,20 +122,20 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Log in to Docker Hub
-      if: github.event_name == 'push' && github.repository == 'yourusername/pdf-spec-to-training-data'
+      if: github.event_name == 'push' && github.repository == 'intuit6/pdf-spec-to-training-data'
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      if: github.event_name == 'push' && github.repository == 'yourusername/pdf-spec-to-training-data'
+      if: github.event_name == 'push' && github.repository == 'intuit6/pdf-spec-to-training-data'
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
         tags: |
-          yourusername/pdf-spec-to-training-data:latest
-          yourusername/pdf-spec-to-training-data:${{ github.sha }}
-        cache-from: type=registry,ref=yourusername/pdf-spec-to-training-data:latest
+          intuit6/pdf-spec-to-training-data:latest
+          intuit6/pdf-spec-to-training-data:${{ github.sha }}
+        cache-from: type=registry,ref=intuit6/pdf-spec-to-training-data:latest
         cache-to: type=inline

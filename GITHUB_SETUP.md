@@ -45,7 +45,7 @@ git init
 git add .
 git commit -m "Initial commit: PDF to training data converter"
 git branch -M main
-git remote add origin https://github.com/yourusername/pdf-spec-to-training-data.git
+git remote add origin https://github.com/intuit6/pdf-spec-to-training-data.git
 git push -u origin main
 ```
 

@@ -4,8 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![CI](https://github.com/yourusername/pdf-spec-to-training-data/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/pdf-spec-to-training-data/actions)
-[![codecov](https://codecov.io/gh/yourusername/pdf-spec-to-training-data/branch/main/graph/badge.svg)](https://codecov.io/gh/yourusername/pdf-spec-to-training-data)
+[![CI](https://github.com/intuit6/pdf-spec-to-training-data/actions/workflows/ci.yml/badge.svg)](https://github.com/intuit6/pdf-spec-to-training-data/actions)
+[![codecov](https://codecov.io/gh/intuit6/pdf-spec-to-training-data/branch/main/graph/badge.svg)](https://codecov.io/gh/intuit6/pdf-spec-to-training-data)
 [![PyPI version](https://badge.fury.io/py/pdf-spec-to-training-data.svg)](https://badge.fury.io/py/pdf-spec-to-training-data)
 [![Downloads](https://pepy.tech/badge/pdf-spec-to-training-data)](https://pepy.tech/project/pdf-spec-to-training-data)
 
@@ -38,7 +38,7 @@
 
 ```bash
 # 1. 克隆或下载项目
-git clone https://github.com/yourusername/pdf-spec-to-training-data.git
+git clone https://github.com/intuit6/pdf-spec-to-training-data.git
 cd pdf-spec-to-training-data
 
 # 2. 安装依赖（推荐使用虚拟环境）

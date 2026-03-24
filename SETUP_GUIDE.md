@@ -175,7 +175,7 @@ git push origin v1.0.0
 
 ### 更新用户名
 
-创建仓库后，需要更新以下地方的 `yourusername`：
+创建仓库后，需要更新以下地方的 `intuit6`：
 
 1. `README.md` - 所有 GitHub 链接
 2. `CONTRIBUTING.md` - 提及 GitHub 仓库的部分
@@ -186,9 +186,9 @@ git push origin v1.0.0
 快速替换：
 ```bash
 cd /root/.openclaw/workspace/pdf-spec-to-training-data
-grep -r "yourusername" --include="*.md" --include="*.py" --include="*.yml"
+grep -r "intuit6" --include="*.md" --include="*.py" --include="*.yml"
 # 使用 sed 批量替换
-find . -type f \( -name "*.md" -o -name "*.py" -o -name "*.yml" \) -exec sed -i 's/yourusername/YOUR_GITHUB_USERNAME/g' {} +
+find . -type f \( -name "*.md" -o -name "*.py" -o -name "*.yml" \) -exec sed -i 's/intuit6/YOUR_GITHUB_USERNAME/g' {} +
 ```
 
 ### 配置 Dependabot
@@ -226,11 +226,11 @@ PR 模板要求填写：
 
 ### 1. 添加徽章（可选）
 
-在 README 添加更多徽章（替换 `yourusername`）：
+在 README 添加更多徽章（替换 `intuit6`）：
 
 ```markdown
-[![Build Status](https://github.com/yourusername/pdf-spec-to-training-data/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/pdf-spec-to-training-data/actions)
-[![codecov](https://codecov.io/gh/yourusername/pdf-spec-to-training-data/branch/main/graph/badge.svg)](https://codecov.io/gh/yourusername/pdf-spec-to-training-data)
+[![Build Status](https://github.com/intuit6/pdf-spec-to-training-data/actions/workflows/ci.yml/badge.svg)](https://github.com/intuit6/pdf-spec-to-training-data/actions)
+[![codecov](https://codecov.io/gh/intuit6/pdf-spec-to-training-data/branch/main/graph/badge.svg)](https://codecov.io/gh/intuit6/pdf-spec-to-training-data)
 [![PyPI version](https://badge.fury.io/py/pdf-spec-to-training-data.svg)](https://badge.fury.io/py/pdf-spec-to-training-data)
 [![Downloads](https://pepy.tech/badge/pdf-spec-to-training-data)](https://pepy.tech/project/pdf-spec-to-training-data)
 ```
@@ -246,7 +246,7 @@ PR 模板要求填写：
 
 ### 3. Docker 镜像（可选）
 
-更新 CI 中的 `docker` job，替换 `yourusername` 为你的 Docker Hub 用户名：
+更新 CI 中的 `docker` job，替换 `intuit6` 为你的 Docker Hub 用户名：
 
 ```yaml
 - name: Log in to Docker Hub
@@ -259,8 +259,8 @@ PR 模板要求填写：
   uses: docker/build-push-action@v5
   with:
     tags: |
-      yourusername/pdf-spec-to-training-data:latest
-      yourusername/pdf-spec-to-training-data:${{ github.sha }}
+      intuit6/pdf-spec-to-training-data:latest
+      intuit6/pdf-spec-to-training-data:${{ github.sha }}
 ```
 
 然后配置 Docker Hub secrets：

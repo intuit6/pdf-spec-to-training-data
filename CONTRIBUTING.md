@@ -14,8 +14,8 @@
 
 如果你发现了一个 bug：
 
-1. 检查 [Issue](https://github.com/yourusername/pdf-spec-to-training-data/issues) 是否已经存在类似问题
-2. 如果没有，[创建新 Issue](https://github.com/yourusername/pdf-spec-to-training-data/issues/new)，使用 **Bug Report** 模板
+1. 检查 [Issue](https://github.com/intuit6/pdf-spec-to-training-data/issues) 是否已经存在类似问题
+2. 如果没有，[创建新 Issue](https://github.com/intuit6/pdf-spec-to-training-data/issues/new)，使用 **Bug Report** 模板
 3. 提供：
    - 清晰的问题描述
    - 复现步骤
@@ -26,7 +26,7 @@
 ### 提议新功能
 
 1. 先搜索 Issue 看是否已有类似提议
-2. [创建新 Issue](https://github.com/yourusername/pdf-spec-to-training-data/issues/new)，使用 **Feature Request** 模板
+2. [创建新 Issue](https://github.com/intuit6/pdf-spec-to-training-data/issues/new)，使用 **Feature Request** 模板
 3. 描述：
    - 你要解决什么问题
    - 建议的解决方案
@@ -40,7 +40,7 @@
 1. Fork 本仓库
 2. 克隆到本地：
    ```bash
-   git clone https://github.com/yourusername/pdf-spec-to-training-data.git
+   git clone https://github.com/intuit6/pdf-spec-to-training-data.git
    cd pdf-spec-to-training-data
    ```
 3. 创建新的分支：
@@ -204,7 +204,7 @@ pytest tests/ -v --cov=src
 
 - 查看 [USAGE.md](docs/USAGE.md) 了解详细使用说明
 - 查看示例代码在 [examples/](examples/)
-- 搜索 [Issues](https://github.com/yourusername/pdf-spec-to-training-data/issues)
+- 搜索 [Issues](https://github.com/intuit6/pdf-spec-to-training-data/issues)
 - 创建新 Issue 提问
 
 ## 感谢

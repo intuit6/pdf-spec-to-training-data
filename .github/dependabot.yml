@@ -10,7 +10,7 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     reviewers:
-      - "yourusername"  # 替换为你的 GitHub 用户名
+      - "intuit6"  # 替换为你的 GitHub 用户名
 
   # 更新 Python 依赖
   - package-ecosystem: "pip"
@@ -21,7 +21,7 @@ updates:
       time: "09:00"
     open-pull-requests-limit: 10
     reviewers:
-      - "yourusername"
+      - "intuit6"
     commit-message:
       prefix: "deps"
       include: "scope"

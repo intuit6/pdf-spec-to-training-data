@@ -3,7 +3,7 @@
 GitHub 仓库创建和推送脚本
 
 用法：
-  python github_setup.py --token YOUR_GITHUB_TOKEN --owner yourusername --repo pdf-spec-to-training-data
+  python github_setup.py --token YOUR_GITHUB_TOKEN --owner intuit6 --repo pdf-spec-to-training-data
 
 或使用交互模式：
   python github_setup.py --interactive
@@ -203,14 +203,14 @@ def main():
   # 命令行模式
   python github_setup.py \\
     --token YOUR_GITHUB_TOKEN \\
-    --owner yourusername \\
+    --owner intuit6 \\
     --repo pdf-spec-to-training-data \\
     --private false
 
   # 创建私有仓库
   python github_setup.py \\
     --token YOUR_GITHUB_TOKEN \\
-    --owner yourusername \\
+    --owner intuit6 \\
     --repo my-private-pdf-tool \\
     --private true
         """
