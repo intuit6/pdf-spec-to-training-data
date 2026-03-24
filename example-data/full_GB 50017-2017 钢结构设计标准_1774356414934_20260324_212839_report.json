@@ -1,0 +1,12 @@
+{
+  "pdf_file": "GB 50017-2017 钢结构设计标准_1774356414934.pdf",
+  "pdf_size_mb": 20.22527313232422,
+  "total_pages": 533,
+  "total_chunks": 533,
+  "total_records": 533,
+  "total_characters": 373670,
+  "avg_chunk_chars": 701,
+  "output_file": "/root/.openclaw/workspace/pdf-spec-to-training-data/output/dataset/full_GB 50017-2017 钢结构设计标准_1774356414934_20260324_212839_jsonl_20260324_212839.jsonl",
+  "processing_time_seconds": 437.471714,
+  "timestamp": "2026-03-24T21:28:39.706026"
+}
