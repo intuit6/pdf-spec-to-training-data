@@ -13,21 +13,13 @@ import argparse
 import sys
 from pathlib import Path
 
-# 添加 src 到 Python 路径
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
 
-from src import (
-    PDFParser,
-    list_pdf_files,
-    DataTransformer,
-    DatasetBuilder,
-    load_config,
-    ensure_dir,
-    setup_logging,
-    TextCleaner,
-    TextChunker,
-    HeaderFooterRemover
-)
+from src.pdf_parser import PDFParser, list_pdf_files
+from src.data_transformer import DataTransformer, TextCleaner, TextChunker, HeaderFooterRemover
+from src.dataset_builder import DatasetBuilder
+from src.utils import load_config, ensure_dir, setup_logging
 import logging
 
 logger = logging.getLogger("dataset_generator")

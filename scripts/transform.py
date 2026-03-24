@@ -14,16 +14,12 @@ import sys
 import json
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
 
-from src import (
-    DataTransformer,
-    DatasetBuilder,
-    TextChunk,
-    load_config,
-    ensure_dir,
-    setup_logging
-)
+from src.data_transformer import DataTransformer, TextChunk
+from src.dataset_builder import DatasetBuilder
+from src.utils import load_config, ensure_dir, setup_logging
 import logging
 
 logger = logging.getLogger("transform")

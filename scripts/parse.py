@@ -14,10 +14,13 @@ import argparse
 import sys
 from pathlib import Path
 
-# 添加 src 到 Python 路径
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+# 添加项目根目录到 Python 路径，以便导入 src 包
+script_file = Path(__file__).resolve()
+project_root = script_file.parent.parent
+sys.path.insert(0, str(project_root))
 
-from src import PDFParser, list_pdf_files, load_config, ensure_dir, setup_logging
+from src.pdf_parser import PDFParser, list_pdf_files
+from src.utils import load_config, ensure_dir, setup_logging
 
 
 def main():
