@@ -1,0 +1,38 @@
+# PDF 规范转训练数据项目依赖
+
+# 核心 PDF 处理
+pdfplumber>=0.10.3        # 文本和表格提取（推荐）
+PyPDF2>=3.0.1            # 基础 PDF 操作（备用）
+pymupdf>=1.23.8          # 快速渲染和文本提取（Alternative）
+
+# 数据处理
+pandas>=2.0.3            # 表格处理
+numpy>=1.24.3            # 数值计算
+
+# OCR 支持（可选，用于扫描件）
+pytesseract>=0.3.10      # Tesseract OCR 接口
+pillow>=10.0.1           # 图像处理
+opencv-python>=4.8.0     # 图像预处理
+
+# 文档处理（可选扩展）
+python-docx>=1.1.0       # Word 文档支持
+openpyxl>=3.1.2          # Excel 支持
+
+# 配置和工具
+pyyaml>=6.0              # YAML 配置文件
+tqdm>=4.66.1             # 进度条
+jupyter>=1.0.0           # 交互式分析（可选）
+
+# 日志和监控
+colorlog>=6.7.0          # 彩色日志
+
+# 开发依赖（可选）
+pytest>=7.4.2            # 测试框架
+pytest-cov>=4.1.0        # 测试覆盖率
+black>=23.9.1            # 代码格式化
+flake8>=6.1.0            # 代码检查
+
+# 注意：Tesseract OCR 引擎需要单独安装系统包：
+# Ubuntu/Debian: sudo apt-get install tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-chi-tra
+# macOS: brew install tesseract tesseract-lang
+# Windows: 从 GitHub 下载安装程序

@@ -1,0 +1,206 @@
+# PDF 规范转训练数据配置文件
+
+# 输入配置
+input:
+  # 输入路径：可以是单个文件或目录
+  path: "./pdfs/"
+  # 是否递归搜索子目录中的 PDF 文件
+  recursive: true
+  # 文件扩展名（小写）
+  extensions: [".pdf"]
+  # 只处理特定页面范围（可选，从0开始）
+  page_range: null  # 例如: [0, 5] 表示第1-6页
+  # 按文件名过滤（正则表达式）
+  filename_pattern: null
+
+# 输出配置
+output:
+  # 输出目录
+  path: "./output/"
+  # 输出格式：jsonl, json, csv, txt, parquet
+  format: "jsonl"
+  # 是否按页拆分内容
+  split_by_page: false
+  # 文本分块策略：fixed（固定长度）, paragraph（按段落）, chapter（按章节）, none（不分块）
+  chunk_strategy: "paragraph"
+  # 分块最大字符数（适用于 fixed 策略）
+  max_chunk_size: 1000
+  # 块之间重叠字符数（保留上下文）
+  chunk_overlap: 100
+  # 文件名前缀
+  filename_prefix: "dataset"
+  # 是否压缩输出（仅支持 parquet 格式）
+  compress: false
+
+# 提取配置
+extraction:
+  # 是否提取纯文本
+  extract_text: true
+  # 是否提取表格
+  extract_tables: true
+  # 表格检测参数
+  table:
+    # 表格检测策略：lattice（有线表）, stream（无线表）, auto（自动）
+    strategy: "auto"
+    # 表格边缘容差（像素）
+    edge_tol: 5
+    # 最小表格尺寸（行 x 列）
+    min_size: [2, 2]
+    # 手动指定表格区域 [[x0, y0, x1, y1], ...]（可选）
+    manual_areas: null
+
+  # 是否提取图片
+  extract_images: false
+  # 图片保存路径（相对输出目录）
+  images_path: "images/"
+  # 图片最小尺寸（像素）
+  min_image_size: [50, 50]
+
+  # OCR 配置（用于扫描件或图片型 PDF）
+  ocr:
+    enabled: false
+    # 语言：chi_sim（简体中文）, chi_tra（繁体中文）, eng（英文）, 可组合如 "chi_sim+eng"
+    languages: "chi_sim+eng"
+    # OCR 引擎：tesseract（默认）, paddle（百度飞桨，中文效果更好）
+    engine: "tesseract"
+    # 图像预处理：去噪、二值化等
+    preprocessing: ["denoise", "binarize"]
+    # 置信度阈值（低于此值的文本将被丢弃）
+    confidence_threshold: 60
+
+  # 布局保留配置
+  preserve_layout:
+    enabled: true
+    # 保留换行和空格
+    keep_blank_lines: true
+    # 缩进处理：preserve（保留）, normalize（标准化）, remove（删除）
+    indent_handling: "preserve"
+    # 字体信息（需要 pdfplumber 的 extra_attrs）
+    keep_font_info: false
+
+# 清洗配置
+filtering:
+  # 最小文本长度（字符），低于此值的内容将被丢弃
+  min_text_length: 5
+  # 最大文本长度（字符），超过此值将被截断（0表示不限制）
+  max_text_length: 0
+
+  # 移除页眉页脚
+  remove_headers_footers:
+    enabled: true
+    # 页眉页 footer 关键字列表
+    keywords: ["第", "页", "Page", "Copyright", "©"]
+    # 页眉页脚通常出现在顶部/底部的比例（0-1）
+    margin_ratio: 0.15
+
+  # 删除重复内容
+  remove_duplicates:
+    enabled: true
+    # 相似度阈值（0-1），高于此值视为重复
+    similarity_threshold: 0.95
+
+  # 清理文本内容
+  text_cleaning:
+    # 删除多余空白字符
+    normalize_whitespace: true
+    # 删除控制字符
+    remove_control_chars: true
+    # 标准化引号和破折号
+    normalize_punctuation: true
+    # 删除特定正则模式的内容（如广告、页脚等）
+    remove_patterns: []
+      # 示例：
+      # - "页码\\s*\\d+"
+      # - "电子版.*pdf"
+      # - "\\d{4}年.*版"
+
+# 结构化解析
+structuring:
+  # 自动识别章节标题
+  detect_headings:
+    enabled: true
+    # 标题模式正则列表
+    patterns:
+      - "^第[\\d一二三四五六七八九十百千]+章\\s+.+"
+      - "^\\d+\\.\\d+\\s+.+"
+      - "^[A-Z]\\.\\s+.+"
+    # 标题级别推断：auto（自动）, numeric（数字编号）, none（不推断）
+    level_inference: "auto"
+
+  # 列表识别
+  detect_lists:
+    enabled: true
+    # 列表标记模式
+    markers: ["•", "◎", "○", "▪", "▫", "⁃", "⁌", "⁍", "→", "※", "★"]
+
+  # 元数据提取（从首页或属性）
+  extract_metadata:
+    enabled: true
+    # 从文本中提取元数据的正则模式
+    patterns:
+      title: "^(.*?规范|.*?标准|.*?指南)"
+      version: "版本[：:]\s*([A-Za-z0-9\\.-]+)"
+      date: "\\d{4}年\\d{1,2}月\\d{1,2}日"
+      organization: "发布单位[：:]\s*(.+)"
+
+# 数据集构建
+dataset:
+  # 训练数据格式：text（纯文本）, qa（问答对）, instruction（指令-响应）
+  format: "text"
+  # 是否添加特殊标记（如 BOS, EOS）
+  add_special_tokens: false
+  # 特殊标记定义
+  special_tokens:
+    bos: "<s>"
+    eos: "</s>"
+    sep: "<sep>"
+
+  # 问答对生成配置（当 format: qa 时生效）
+  qa_generation:
+    # 是否从文档自动生成问题
+    auto_generate_questions: false
+    # 问题模板（用于基于内容生成问题）
+    question_templates:
+      - "什么是{entity}？"
+      - "{entity}的作用是什么？"
+      - "如何实现{concept}？"
+      - "列举{entity}的主要特点"
+    # 问题类型：definition（定义）, procedure（流程）, comparison（对比）, enumeration（列举）
+    question_types: ["definition", "procedure", "enumeration"]
+
+  # 指令-响应格式配置（当 format: instruction 时生效）
+  instruction:
+    # 指令前缀
+    instruction_prefix: "根据以下文档内容回答问题："
+    # 指令模板
+    templates:
+      - "请阅读以下技术规范，{task}："
+      - "基于文档内容，{task}。"
+    # 任务类型：summarize（摘要）, explain（解释）, compare（对比）, list（列举）
+    task_types: ["summarize", "explain", "list"]
+
+# 日志和监控
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "./logs/pdf_converter.log"
+  console: true
+
+# 性能配置
+performance:
+  # 进程数（并行处理 PDF）
+  workers: 4
+  # 批处理大小（每批处理的 PDF 数量）
+  batch_size: 10
+  # 内存限制（MB，0表示不限制）
+  memory_limit: 0
+
+# 高级选项（一般不需要修改）
+advanced:
+  # PDF 解析器选择：pdfplumber（默认）, pymupdf
+  parser: "pdfplumber"
+  # 表格坐标系统：original（原始坐标）, normalized（归一化 0-1）
+  table_coordinate_system: "original"
+  # 是否保留原始 PDF 坐标信息
+  keep_coordinates: false
+  # 调试模式：保存中间结果到 debug 目录
+  debug: false

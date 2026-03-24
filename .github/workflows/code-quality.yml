@@ -1,0 +1,65 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ".[dev]"
+
+    - name: Run linters
+      run: |
+        # Black formatting check
+        black --check src/ tests/ scripts/ || { echo "Code needs formatting. Run 'black src/ tests/ scripts/'" && exit 1; }
+
+        # isort import sorting
+        isort --check-only src/ tests/ scripts/ || { echo "Imports need sorting. Run 'isort src/ tests/ scripts/'" && exit 1; }
+
+        # flake8 linting
+        flake8 src/ tests/ scripts/ \
+          --count \
+          --select=E9,F63,F7,F82 \
+          --show-source \
+          --statistics
+
+        flake8 src/ tests/ scripts/ \
+          --count \
+          --exit-zero \
+          --max-complexity=10 \
+          --max-line-length=88 \
+          --statistics
+
+    - name: Type checking with mypy
+      run: |
+        mypy src/ --ignore-missing-imports --no-error-summary || true
+
+    - name: Security check with bandit
+      run: |
+        bandit -r src/ -f json -o bandit-report.json || true
+        echo "Security scan complete. Review bandit-report.json for details."
+
+    - name: Check for broken symlinks
+      run: |
+        find . -type l -! -exec test -e {} \; -print && exit 1 || echo "No broken symlinks"
+
+    - name: Check for large files
+      run: |
+        git ls-files -z | xargs -0 du -ch | grep -E '[0-9]+\s+M' && exit 1 || echo "No large files detected"
